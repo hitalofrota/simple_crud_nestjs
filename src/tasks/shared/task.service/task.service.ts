@@ -26,14 +26,30 @@ export class TaskService {
     }
 
     create(task: Task){
-
+        console.log("Aqui",task)
+        let lastId = 0;
+        if(this.tasks.length > 0) {
+            lastId = this.tasks[this.tasks.length -1].id;
+        }
+        task.id = lastId + 1;
+        this.tasks.push(task);
+        return task;
     }
 
     update(task: Task){
-
+        const taskArray = this.getById(task.id)
+        if(taskArray) {
+            taskArray.description = task.description;
+            taskArray.completed = task.completed;
+        } else {
+            taskArray.description = "Deu ruim meu patrão"
+            return
+        }
+        return taskArray;
     }
 
     delete(id: number){
-
+        const index = this.tasks.findIndex((value) => value.id == id )
+        this.tasks.splice(index, 1);
     }
 }
