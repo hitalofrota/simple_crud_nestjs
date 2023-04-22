@@ -5,4 +5,7 @@ export declare class TasksController {
     constructor(taskService: TaskService);
     getAll(): Promise<Task[]>;
     getById(id: number): Promise<Task>;
+    create(task: Task): Promise<Task>;
+    update(id: number, task: Task): Promise<Task>;
+    delete(id: number): Promise<void>;
 }
